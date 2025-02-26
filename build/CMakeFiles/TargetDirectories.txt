@@ -1,0 +1,5 @@
+/Users/leelavathi/Desktop/Ph.d/Spring'25/aos/p2p/P2P-Chat/build/CMakeFiles/Chatbox.dir
+/Users/leelavathi/Desktop/Ph.d/Spring'25/aos/p2p/P2P-Chat/build/CMakeFiles/edit_cache.dir
+/Users/leelavathi/Desktop/Ph.d/Spring'25/aos/p2p/P2P-Chat/build/CMakeFiles/rebuild_cache.dir
+/Users/leelavathi/Desktop/Ph.d/Spring'25/aos/p2p/P2P-Chat/build/CMakeFiles/Chatbox_autogen_timestamp_deps.dir
+/Users/leelavathi/Desktop/Ph.d/Spring'25/aos/p2p/P2P-Chat/build/CMakeFiles/Chatbox_autogen.dir

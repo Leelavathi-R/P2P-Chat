@@ -9,11 +9,13 @@
 
 UdpChat::UdpChat(const QString &origin, QObject *parent) : QObject(parent),origin(origin) {
     
-    localPort = QRandomGenerator::global()->bounded(4000, 6000);
+    //localPort = QRandomGenerator::global()->bounded(4000, 6000);
     
-    udpSocketP2P.bind(QHostAddress::AnyIPv4, localPort, QUdpSocket::ShareAddress | QUdpSocket::ReuseAddressHint);
+    udpSocketP2P.bind(QHostAddress::AnyIPv4, 0, QUdpSocket::ShareAddress | QUdpSocket::ReuseAddressHint);
     connect(&udpSocketP2P, &QUdpSocket::readyRead, this, &UdpChat::processIncomingMessages);
-    
+    localPort = udpSocketP2P.localPort();
+    qDebug() << "Discovered available local port:" << localPort;
+
     udpSocketBroadcast.bind(QHostAddress::Any, 9999, QUdpSocket::ShareAddress | QUdpSocket::ReuseAddressHint);
     connect(&udpSocketBroadcast, &QUdpSocket::readyRead, this, &UdpChat::processBroadCastMessages);
     broadcastPresence();
@@ -112,7 +114,8 @@ void UdpChat::processBroadCastMessages() {
 
         if (!discoveredPeers.contains(peerOrigin)) {  
             discoveredPeers[peerOrigin] = qMakePair(peerPort, QVector<int>()); ; 
-            emit messageReceived(message);
+            if (peerOrigin != origin)
+                emit messageReceived(message);
         } 
         if ((!vectorClock.contains(peerOrigin)) && (peerOrigin != origin)) {
             vectorClock[peerOrigin] = 0;
